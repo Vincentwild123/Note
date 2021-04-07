@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>定时器</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        position: relative;
+      }
+      .loading {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        background-color: #fff;
+      }
+      .pic {
+        width: 240px;
+        height: 240px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        background: url("./loading.gif") no-repeat;
+      }
+      #content {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script>
+      $(function () {
+        //可使用jquery动态添加遮罩及loading效果
+        // var loading = '<div class="loading"><div class="pic"></div></div>';
+        //$("body").append(loading);
+        //启动一个定时器
+        setInterval(function () {
+          $(".loading").fadeOut(); //3秒之后影藏
+        }, 3000);
+      });
+    </script>
+  </head>
+  <body>
+    <div class="loading">
+      <div class="pic"></div>
+    </div>
+    <div id="content">
+      <h1>主题内容</h1>
+    </div>
+  </body>
+</html>
