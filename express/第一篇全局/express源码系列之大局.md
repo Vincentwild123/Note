@@ -18,7 +18,7 @@
 
 #### 1. 程序的入口为bin/www.js
 
-![bin/www.js](1.png)
+![bin/www.js](https://img.imgdb.cn/item/607bfab78322e6675c08d03e.png)
 
 **总结：**
 
@@ -27,21 +27,21 @@
 
 #### 2. 原生的http.createSerevr方法使用回顾
 
-![原生http.createServer方法使用](2.png)
+![原生http.createServer方法使用](https://img.imgdb.cn/item/607bfab78322e6675c08d044.png)
 
 
 
 ​	那问题来了，参数是app，那是不是就是说app就是options呢？让我们看看，根目录下的app.js文件到底导出了个什么玩意
 
-![根目录下的app.js文件](3.png)
+![根目录下的app.js文件](https://img.imgdb.cn/item/607bfab78322e6675c08d04c.png)
 
 ​	**可以看到，app是由执行express方法生成的，此时此刻就只能到express模块的源码看看了**
 
-![express模块lib](./4.png)
+![express模块lib](https://img.imgdb.cn/item/607bfab78322e6675c08d057.png)
 
 ##### 	显然导出的app是一个函数，但http.createServer要求options是对象，那传进去一个函数会怎么样呢？为了追求刺激，那只能贯彻到底咯~，为一探究竟，我追到了node源码
 
-![http.createServer源码](5.png)
+![http.createServer源码](https://img.imgdb.cn/item/607bfab78322e6675c08d03b.png)
 
 破案了，app方法是作为**callback**传进http.createServer去的
 
@@ -54,7 +54,7 @@
 
 **番外：request事件**
 
-![request事件](./6.png)
+![request事件](https://img.imgdb.cn/item/607bfae38322e6675c091edc.png)
 
 ---
 
@@ -68,27 +68,27 @@
 
 1. app对象
 
-![app对象出生地](7.png)
+![app对象出生地](https://img.imgdb.cn/item/607bfadd8322e6675c0913bd.png)
 
 可以看到，app出身贫寒，只是个函数，但经过两次属性Mixin装备升级之后，拥有了无上神力，其中EventEmitter.prototype的Minix是让app具有on事件，emit事件等一系列事件相关的能力，proto的Mixin则是express专属能力，为了节省时间，我总结了下proto的Mixin到底mixin了什么
 
-![app proto Mixin](8.png)
+![app proto Mixin](https://img.imgdb.cn/item/607bfadd8322e6675c0913c5.png)
 
 具体的细节先不管，记住我们的策略-面向对象，找出现的对象，新加入的Router对象是何方神圣？让我们一探究竟
 
 ##### 2. Router对象
 
-![router对象](9.png)
+![router对象](https://img.imgdb.cn/item/607bfadd8322e6675c0913d1.png)
 
 Router对象略显尊贵，单独拥有一个文件夹，座下还有layer，route两大弟子，可以看到，router本体也是一个函数，长得不能说和app一摸一样，可以说是毫无差别，也是经过原型对象1对1传功增强，顺其自然，我们就要看proto原型到底传了什么功给他。
 
-![router对象属性方法](10.png)
+![router对象属性方法](https://img.imgdb.cn/item/607bfadd8322e6675c0913db.png)
 
 老规矩，具体细节不管，看看新出的route，layer两大弟子是何方神圣，既然都是router的大弟子，那就一起看了
 
-![route layer](11.png)
+![route layer](https://img.imgdb.cn/item/607bfadd8322e6675c0913ba.png)
 
-![route layer 属性方法](12.png)
+![route layer 属性方法](https://img.imgdb.cn/item/607bfae38322e6675c091ee1.png)
 
 到目前为止，信息量有点大，忽略了很多细节，但基本的**四个重要对象**都已经出场了，让我们先给他们起个名字，好理解他们的职责，线索三中会讲他们之间的相互作用。
 
@@ -118,7 +118,7 @@ layer ---->  打工人 无姓氏·雷亚 （layer)
 
 基本关系如图，同样会在后文解析，先形成印象
 
-![关系图](13.png)
+![关系图](https://img.imgdb.cn/item/607bfae88322e6675c0927e5.png)
 
 ---
 
@@ -128,7 +128,7 @@ layer ---->  打工人 无姓氏·雷亚 （layer)
 
 ​		实际的应用中，在请求到来之前，我们是要做很多初始化的工作的，以Express脚手架生成的项目模板为例，如下图，我们会在监听之前，添加中间件和设置一些东西
 
-![准备](14.png)
+![准备](https://img.imgdb.cn/item/607bfae88322e6675c0927ec.png)
 
 （app.set是用于设置app.settings的，这里先不做分析）这里就会用到app.use和app.all两个方法，相同的还有app.get,app.post....等等，无一例外，这些方法都与整个程序的路由解析息息相关。
 
@@ -140,7 +140,7 @@ layer ---->  打工人 无姓氏·雷亚 （layer)
 
 总结如下
 
-![对象关系](16.jpg)
+![对象关系](https://img.imgdb.cn/item/607bfae88322e6675c0927f4.png)
 
 
 
@@ -150,7 +150,7 @@ layer ---->  打工人 无姓氏·雷亚 （layer)
 
 ##### 番外：干实事的layer对象都有哪些属性
 
-![layer对象属性](16.png)
+![layer对象属性](https://img.imgdb.cn/item/607bfae88322e6675c0927dd.png)
 
 ---
 
@@ -162,11 +162,11 @@ layer ---->  打工人 无姓氏·雷亚 （layer)
 
 ​	在入口中，我们得出结论，当http的request触发时，app会被作为callback来处理这个事件，同时获得两个参数，原生req对象和原生res对象。
 
-![app.handle](17.png)
+![app.handle](https://img.imgdb.cn/item/607bfae38322e6675c091eec.png)
 
 app会在内部调用app.handle,此时参数中是没有next，换而言之，next是undefined
 
-![app.handle](18.png)
+![app.handle](https://img.imgdb.cn/item/607bfaee8322e6675c09338f.png)
 
 ​	因为callback是undefined，所以done会被包装成finalhandler,这个函数不用理会，最后检查下有无设置router，当然了，router是在调用app.use/app.all那些接口才会延时创建，没有router就说明没有要处理的中间件函数，此时直接返回就行了，有router就调用router.handle,这个函数才是重中之重，著名的next方法原型就是定义在其中（route.dispatch中也有，这是后话了）
 
@@ -319,7 +319,7 @@ proto.handle = function handle(req, res, out) {
 
 ​		大体上流程就是上述那样，但因为layer种类的不同，就会有不同的handle函数，比如说有的handle就是中间件有的handle就是route.dipatch，那如果匹配到的是后者会怎么样呢？
 
-![route.dispatch](19.png)
+![route.dispatch](https://img.imgdb.cn/item/607bfaee8322e6675c093393.png)
 
 估计你也猜到了，route.dispatch简直跟router.handle长得一摸一样，那就好理解了，当在router.stack中匹配到handle是route.dispatch的layer，route.dispatch就会执行，执行的结果就是拿到method和path去匹配自己的stack中的layer，匹配到没有匹配的layer的时候就返回到router.stack中，相当于新开了一棵递归树。
 
