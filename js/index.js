@@ -1,13 +1,5 @@
-function tick(){
-    const element = (
-        <div>
-            <h1>hello world!</h1>
-            <h2>It is {new Date().toLocaleTimeString()}.</h2>
-        </div>
-    )
-    ReactDOM.render(
-        element,
-        document.getElementById('app')
-    )
+console.time('timer')
+for (let i = 0; i <= 1000000; i++) {
+    let str = '0' + i;
 }
-setInterval(tick,1000)
+console.timeEnd('timer')
