@@ -130,7 +130,7 @@ module.exports = {
     //...
     module:{
         rules:[{
-                test:/\.js$/，
+                test:/\.js$/,
                 use:['happypack/loader?id=babel']
                 exclude:path.resolve(__dirname, 'node_modules')
             },{
@@ -163,7 +163,7 @@ plugins: [
         uglifyJS:{
             //...这里放uglifyJS的参数
         },
-        //...其他ParallelUglifyPlugin的参数，设置cacheDir可以开启缓存，加快构建速度
+        //...其他ParallelUglifyPlugin的参数,设置cacheDir可以开启缓存,加快构建速度
     })
 ]
 ```
@@ -185,12 +185,12 @@ plugins: [
   new UglifyJSPlugin({
     compress: {
       warnings: false, //删除无用代码时不输出警告
-      drop_console: true, //删除所有console语句，可以兼容IE
+      drop_console: true, //删除所有console语句,可以兼容IE
       collapse_vars: true, //内嵌已定义但只使用一次的变量
       reduce_vars: true, //提取使用多次但没定义的静态值到变量
     },
     output: {
-      beautify: false, //最紧凑的输出，不保留空格和制表符
+      beautify: false, //最紧凑的输出,不保留空格和制表符
       comments: false, //删除所有注释
     },
   }),
@@ -221,13 +221,15 @@ plugins:[
     })
 ]
 ```
-+ 压缩CSS:css-loader?minimize,PurifyCSSPlugin
+
+- 压缩 CSS:css-loader?minimize,PurifyCSSPlugin
 
 3. Tree Shaking
-+ 启动
-  1. 修改babelrc配置文件,module:"false",关闭Babel转换功能,保留ES6模块化语法
-  2. 启动webpack时带上 --display-used-exports 可以在shell打印出关于代码剔除的提示
-  3. 使用UglifyJSPlugin,或者启动时使用--optimize-minimize
-  4. 在使用第三方库时，需要配置 resolve.mainFields: ['jsnext:main', 'main'] 以指明解析第三方库代码时，采用ES6模块化的代码入口
+
+- 启动
+  1. 修改 babelrc 配置文件,module:"false",关闭 Babel 转换功能,保留 ES6 模块化语法
+  2. 启动 webpack 时带上 --display-used-exports 可以在 shell 打印出关于代码剔除的提示
+  3. 使用 UglifyJSPlugin,或者启动时使用--optimize-minimize
+  4. 在使用第三方库时,需要配置 resolve.mainFields: ['jsnext:main', 'main'] 以指明解析第三方库代码时,采用 ES6 模块化的代码入口
 
 4. 加速网络请求
